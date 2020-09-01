@@ -59,8 +59,8 @@ export default function getJoseUtil({ jws, KeyUtil, X509, crypto, hextob64u, b64
 
             if (!now) {
                 now = parseInt(Date.now() / 1000);
-                console.log("now is",now)
             }
+            console.log("now is",now)
 
             var payload = JoseUtil.parseJwt(jwt).payload;
 
