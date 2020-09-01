@@ -45,7 +45,7 @@ export default function getJoseUtil({ jws, KeyUtil, X509, crypto, hextob64u, b64
                     return Promise.reject(new Error("Unsupported key type: " + key && key.kty));
                 }
 
-                return JoseUtil._validateJwt(jwt, key, issuer, audience, clockSkew, now, timeInsensitive);
+                return JoseUtil._validateJwt(jwt, key, issuer, audience, clockSkew, now, timeInsensitive, offsetSeconds);
             } catch (e) {
                 Log.error(e && e.message || e);
                 return Promise.reject("JWT validation failed");
@@ -58,9 +58,10 @@ export default function getJoseUtil({ jws, KeyUtil, X509, crypto, hextob64u, b64
             }
 
             if (!now) {
-                now = parseInt(Date.now() / 1000);
+                now = parseInt(Date.now() / 1000) + offsetSeconds;
             }
-            console.log("valid attributes now is",now, offsetSeconds)
+            console.log("valid attributes now is",now)
+            console.log("adjusted by offset:",offsetSeconds)
 
             var payload = JoseUtil.parseJwt(jwt).payload;
 
