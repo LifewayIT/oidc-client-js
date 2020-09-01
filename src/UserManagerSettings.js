@@ -35,7 +35,7 @@ export class UserManagerSettings extends OidcClientSettings {
         popupNavigator = new PopupNavigator(),
         iframeNavigator = new IFrameNavigator(),
         userStore = new WebStorageStateStore({ store: Global.sessionStorage }),
-        offsetSeconds = 0
+        offsetSeconds = new Promise((resolve) => resolve(0))
     } = {}) {
         super(arguments[0]);
 

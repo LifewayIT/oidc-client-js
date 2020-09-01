@@ -282,21 +282,23 @@ export class ResponseValidator {
             let clockSkewInSeconds = this._settings.clockSkew;
             Log.debug("ResponseValidator._validateIdTokenAttributes: Validaing JWT attributes; using clock skew (in seconds) of: ", clockSkewInSeconds);
 
-            return this._joseUtil.validateJwtAttributes(response.id_token, issuer, audience, clockSkewInSeconds, undefined, true, this._settings.offsetSeconds).then(payload => {
-            
-                if (state.nonce && state.nonce !== payload.nonce) {
-                    Log.error("ResponseValidator._validateIdTokenAttributes: Invalid nonce in id_token");
-                    return Promise.reject(new Error("Invalid nonce in id_token"));
-                }
+            return this._settings.offsetSeconds.then(o => {
+                return this._joseUtil.validateJwtAttributes(response.id_token, issuer, audience, clockSkewInSeconds, undefined, true, o).then(payload => {
 
-                if (!payload.sub) {
-                    Log.error("ResponseValidator._validateIdTokenAttributes: No sub present in id_token");
-                    return Promise.reject(new Error("No sub present in id_token"));
-                }
+                    if (state.nonce && state.nonce !== payload.nonce) {
+                        Log.error("ResponseValidator._validateIdTokenAttributes: Invalid nonce in id_token");
+                        return Promise.reject(new Error("Invalid nonce in id_token"));
+                    }
 
-                response.profile = payload;
-                return response;
-            });
+                    if (!payload.sub) {
+                        Log.error("ResponseValidator._validateIdTokenAttributes: No sub present in id_token");
+                        return Promise.reject(new Error("No sub present in id_token"));
+                    }
+
+                    response.profile = payload;
+                    return response;
+                });
+            })
         });
     }
 
@@ -365,18 +367,21 @@ export class ResponseValidator {
                 let clockSkewInSeconds = this._settings.clockSkew;
                 Log.debug("ResponseValidator._validateIdToken: Validaing JWT; using clock skew (in seconds) of: ", clockSkewInSeconds);
                 let now = Date.now() / 1000;
-                return this._joseUtil.validateJwt(response.id_token, key, issuer, audience, clockSkewInSeconds, now, true, this._settings.offsetSeconds).then(()=>{
-                    Log.debug("ResponseValidator._validateIdToken: JWT validation successful");
+                return this._settings.offsetSeconds.then(o => {
+                    return this._joseUtil.validateJwt(response.id_token, key, issuer, audience, clockSkewInSeconds, now, true, o).then(()=>{
+                        Log.debug("ResponseValidator._validateIdToken: JWT validation successful");
 
-                    if (!jwt.payload.sub) {
-                        Log.error("ResponseValidator._validateIdToken: No sub present in id_token");
-                        return Promise.reject(new Error("No sub present in id_token"));
-                    }
+                        if (!jwt.payload.sub) {
+                            Log.error("ResponseValidator._validateIdToken: No sub present in id_token");
+                            return Promise.reject(new Error("No sub present in id_token"));
+                        }
 
-                    response.profile = jwt.payload;
+                        response.profile = jwt.payload;
 
-                    return response;
-                });
+                        return response;
+                    });
+
+                })
             });
         });
     }
