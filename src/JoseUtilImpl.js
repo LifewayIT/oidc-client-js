@@ -21,6 +21,7 @@ export default function getJoseUtil({ jws, KeyUtil, X509, crypto, hextob64u, b64
 
         static validateJwt(jwt, key, issuer, audience, clockSkew, now, timeInsensitive) {
             Log.debug("JoseUtil.validateJwt");
+            console.log("now is",now)
 
             try {
                 if (key.kty === "RSA") {
