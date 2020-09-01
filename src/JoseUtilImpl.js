@@ -118,9 +118,9 @@ export default function getJoseUtil({ jws, KeyUtil, X509, crypto, hextob64u, b64
             return Promise.resolve(payload);
         }
 
-        static _validateJwt(jwt, key, issuer, audience, clockSkew, now, timeInsensitive) {
+        static _validateJwt(jwt, key, issuer, audience, clockSkew, now, timeInsensitive, offsetSeconds) {
 
-            return JoseUtil.validateJwtAttributes(jwt, issuer, audience, clockSkew, now, timeInsensitive).then(payload => {
+            return JoseUtil.validateJwtAttributes(jwt, issuer, audience, clockSkew, now, timeInsensitive, offsetSeconds).then(payload => {
                 try {
                     if (!jws.JWS.verify(jwt, key, AllowedSigningAlgs)) {
                         Log.error("JoseUtil._validateJwt: signature validation failed");
