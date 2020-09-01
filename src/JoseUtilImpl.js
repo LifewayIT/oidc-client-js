@@ -19,10 +19,9 @@ export default function getJoseUtil({ jws, KeyUtil, X509, crypto, hextob64u, b64
             }
         }
 
-        static validateJwt(jwt, key, issuer, audience, clockSkew, now, timeInsensitive) {
+        static validateJwt(jwt, key, issuer, audience, clockSkew, now, timeInsensitive, offsetSeconds) {
             Log.debug("JoseUtil.validateJwt");
-            console.log("now is",now)
-
+            console.log("validateJWT now is",now, offsetSeconds)
             try {
                 if (key.kty === "RSA") {
                     if (key.e && key.n) {
@@ -53,7 +52,7 @@ export default function getJoseUtil({ jws, KeyUtil, X509, crypto, hextob64u, b64
             }
         }
 
-        static validateJwtAttributes(jwt, issuer, audience, clockSkew, now, timeInsensitive) {
+        static validateJwtAttributes(jwt, issuer, audience, clockSkew, now, timeInsensitive, offsetSeconds) {
             if (!clockSkew) {
                 clockSkew = 0;
             }
@@ -61,7 +60,7 @@ export default function getJoseUtil({ jws, KeyUtil, X509, crypto, hextob64u, b64
             if (!now) {
                 now = parseInt(Date.now() / 1000);
             }
-            console.log("now is",now)
+            console.log("valid attributes now is",now, offsetSeconds)
 
             var payload = JoseUtil.parseJwt(jwt).payload;
 
