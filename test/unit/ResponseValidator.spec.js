@@ -144,7 +144,8 @@ describe("ResponseValidator", function () {
 
         settings = {
             authority: "op",
-            client_id: 'client'
+            client_id: 'client',
+            offsetSeconds: Promise.resolve((resolve,reject) => resolve(0))
         };
         stubMetadataService = new StubMetadataService();
         stubUserInfoService = new StubUserInfoService();
