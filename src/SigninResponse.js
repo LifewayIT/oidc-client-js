@@ -39,6 +39,7 @@ export class SigninResponse {
         if (typeof expires_in === 'number' && expires_in > 0) {
             let now = parseInt(Date.now() / 1000);
             this.expires_at = now + expires_in;
+            console.log("set expires at", this.expires_at)
         }
     }
 
