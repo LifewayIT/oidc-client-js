@@ -21,6 +21,7 @@ export class AccessTokenEvents {
 
     load(container) {
         // only register events if there's an access token and it has an expiration
+        console.log("load",container);
         if (container.access_token && container.expires_in !== undefined) {
             let duration = container.expires_in;
             Log.debug("AccessTokenEvents.load: access token present, remaining duration:", duration);
