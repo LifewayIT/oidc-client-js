@@ -10,7 +10,8 @@ import { SignoutRequest } from './SignoutRequest.js';
 import { SignoutResponse } from './SignoutResponse.js';
 import { SigninState } from './SigninState.js';
 import { State } from './State.js';
-
+Log.logger = console;
+Log.level = Log.DEBUG;
 export class OidcClient {
     constructor(settings = {}) {
         if (settings instanceof OidcClientSettings) {
