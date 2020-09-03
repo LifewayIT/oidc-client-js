@@ -28,10 +28,11 @@ export class AccessTokenEvents {
             if (duration > 0) {
                 // only register expiring if we still have time
                 let expiring = duration - this._accessTokenExpiringNotificationTime;
+                console.log("in load expiring is:",expiring)
                 if (expiring <= 0){
                     expiring = 1;
                 }
-                
+
                 Log.debug("AccessTokenEvents.load: registering expiring timer in:", expiring);
                 this._accessTokenExpiring.init(expiring);
             }

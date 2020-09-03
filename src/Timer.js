@@ -32,11 +32,11 @@ export class Timer extends Event {
         duration = parseInt(duration);
 
         var expiration = this.now + duration;
-        if (this.expiration === expiration && this._timerHandle) {
-            // no need to reinitialize to same expiration, so bail out
-            Log.debug("Timer.init timer " + this._name + " skipping initialization since already initialized for expiration:", this.expiration);
-            return;
-        }
+        // if (this.expiration === expiration && this._timerHandle) {
+        //     // no need to reinitialize to same expiration, so bail out
+        //     Log.debug("Timer.init timer " + this._name + " skipping initialization since already initialized for expiration:", this.expiration);
+        //     return;
+        // }
 
         this.cancel();
 
