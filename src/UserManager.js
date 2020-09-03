@@ -219,7 +219,7 @@ export class UserManager extends OidcClient {
     _validateIdTokenFromTokenRefreshToken(profile, id_token) {
         return this._metadataService.getIssuer().then(issuer => {
             return this._settings.offsetSeconds.then(o => {
-                return this._joseUtil.validateJwtAttributes(id_token, issuer, this._settings.client_id, this._settings.clockSkew, undefined, true,  this._settings.offsetSeconds).then(payload => {
+                return this._joseUtil.validateJwtAttributes(id_token, issuer, this._settings.client_id, this._settings.clockSkew, undefined, false,  this._settings.offsetSeconds).then(payload => {
                     if (!payload) {
                         Log.error("UserManager._validateIdTokenFromTokenRefreshToken: Failed to validate id_token");
                         return Promise.reject(new Error("Failed to validate id_token"));
