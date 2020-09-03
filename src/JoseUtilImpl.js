@@ -57,11 +57,7 @@ export default function getJoseUtil({ jws, KeyUtil, X509, crypto, hextob64u, b64
                 clockSkew = 0;
             }
 
-            if (!now) {
-                now = parseInt(Date.now() / 1000) + offsetSeconds;
-            }
-            console.log("valid attributes now is",now)
-            console.log("adjusted by offset:",offsetSeconds)
+            now = parseInt(Date.now() / 1000) + offsetSeconds;
 
             var payload = JoseUtil.parseJwt(jwt).payload;
 

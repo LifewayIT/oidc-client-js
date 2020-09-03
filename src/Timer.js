@@ -69,7 +69,7 @@ export class Timer extends Event {
         var diff = this._expiration - this.now;
         Log.debug("Timer.callback; " + this._name + " timer expires in:", diff);
 
-        if (this._expiration <= this.now) {
+        if (diff <= 0) {
             this.cancel();
             super.raise();
         }
