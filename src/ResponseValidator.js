@@ -283,7 +283,7 @@ export class ResponseValidator {
             Log.debug("ResponseValidator._validateIdTokenAttributes: Validaing JWT attributes; using clock skew (in seconds) of: ", clockSkewInSeconds);
 
             return this._settings.offsetSeconds.then(o => {
-                return this._joseUtil.validateJwtAttributes(response.id_token, issuer, audience, clockSkewInSeconds, undefined, true, o).then(payload => {
+                return this._joseUtil.validateJwtAttributes(response.id_token, issuer, audience, clockSkewInSeconds, undefined, false, o).then(payload => {
 
                     if (state.nonce && state.nonce !== payload.nonce) {
                         Log.error("ResponseValidator._validateIdTokenAttributes: Invalid nonce in id_token");
