@@ -24,13 +24,10 @@ export class User {
         return undefined;
     }
     set expires_in(value) {
-        // console.log("user expires in", value);
-        // console.log("user expires at", this.expires_at);
         let expires_in = parseInt(value);
         if (typeof expires_in === 'number' && expires_in > 0) {
             let now = parseInt(`${Date.now() / 1000}`);
             this.expires_at = now + expires_in;
-            console.log("user expires at", this.expires_at);
         }
     }
 

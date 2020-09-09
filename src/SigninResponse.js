@@ -28,18 +28,16 @@ export class SigninResponse {
 
     get expires_in() {
         if (this.expires_at) {
-            let now = parseInt(Date.now() / 1000);
+            let now = parseInt(`${Date.now() / 1000}`);
             return this.expires_at - now;
         }
         return undefined;
     }
     set expires_in(value){
-        console.log("set expires_in", value)
         let expires_in = parseInt(value);
         if (typeof expires_in === 'number' && expires_in > 0) {
-            let now = parseInt(Date.now() / 1000);
+            let now = parseInt(`${Date.now() / 1000}`);
             this.expires_at = now + expires_in;
-            console.log("set expires at", this.expires_at)
         }
     }
 

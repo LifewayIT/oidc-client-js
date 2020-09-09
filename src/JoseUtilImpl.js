@@ -19,7 +19,7 @@ export default function getJoseUtil({ jws, KeyUtil, X509, crypto, hextob64u, b64
             }
         }
 
-        static validateJwt(jwt, key, issuer, audience, clockSkew, now, timeInsensitive, offsetSeconds) {
+        static validateJwt(jwt, key, issuer, audience, clockSkew, now, timeInsensitive) {
             Log.debug("JoseUtil.validateJwt");
             try {
                 if (key.kty === "RSA") {
@@ -44,14 +44,14 @@ export default function getJoseUtil({ jws, KeyUtil, X509, crypto, hextob64u, b64
                     return Promise.reject(new Error("Unsupported key type: " + key && key.kty));
                 }
 
-                return JoseUtil._validateJwt(jwt, key, issuer, audience, clockSkew, now, timeInsensitive, offsetSeconds);
+                return JoseUtil._validateJwt(jwt, key, issuer, audience, clockSkew, now, timeInsensitive);
             } catch (e) {
                 Log.error(e && e.message || e);
                 return Promise.reject("JWT validation failed");
             }
         }
 
-        static validateJwtAttributes(jwt, issuer, audience, clockSkew, now, timeInsensitive, offsetSeconds) {
+        static validateJwtAttributes(jwt, issuer, audience, clockSkew, now, timeInsensitive) {
             if (!clockSkew) {
                 clockSkew = 0;
             }
@@ -114,9 +114,9 @@ export default function getJoseUtil({ jws, KeyUtil, X509, crypto, hextob64u, b64
             return Promise.resolve(payload);
         }
 
-        static _validateJwt(jwt, key, issuer, audience, clockSkew, now, timeInsensitive, offsetSeconds) {
+        static _validateJwt(jwt, key, issuer, audience, clockSkew, now, timeInsensitive) {
 
-            return JoseUtil.validateJwtAttributes(jwt, issuer, audience, clockSkew, now, timeInsensitive, offsetSeconds).then(payload => {
+            return JoseUtil.validateJwtAttributes(jwt, issuer, audience, clockSkew, now, timeInsensitive).then(payload => {
                 try {
                     if (!jws.JWS.verify(jwt, key, AllowedSigningAlgs)) {
                         Log.error("JoseUtil._validateJwt: signature validation failed");
