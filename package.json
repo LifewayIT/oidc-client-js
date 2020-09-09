@@ -1,6 +1,6 @@
 {
   "name": "@lifewayit/oidc-client",
-  "version": "2.0.0",
+  "version": "1.11.3",
   "description": "OpenID Connect (OIDC) & OAuth2 client library",
   "main": "lib/oidc-client.min.js",
   "private": false,
