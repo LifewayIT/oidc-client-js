@@ -5,6 +5,8 @@
 Library to provide OpenID Connect (OIDC) and OAuth2 protocol support for client-side, browser-based JavaScript client applications. 
 Also included is support for user session and access token management.
 
+This fork of the oidc-client introduces a new setting (offsetSeconds) of `Promise[Int]` - the library applies this offset to the current time when validating JWTs. This change addresses the case where a client clock can be significantly different from the auth server clock.
+
 ## Install
 
 ##### Node.js
