@@ -1,5 +1,3 @@
-[![npm package](https://badge.fury.io/js/%40lifeway%2Foidc-client.svg)](https://www.npmjs.com/package/@lifeway/oidc-client)
-
 # oidc-client
 
 Library to provide OpenID Connect (OIDC) and OAuth2 protocol support for client-side, browser-based JavaScript client applications. 
