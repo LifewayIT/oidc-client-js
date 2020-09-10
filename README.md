@@ -1,4 +1,4 @@
-[![npm package](https://badge.fury.io/js/oidc-client.svg)](https://www.npmjs.com/package/@lifeway/oidc-client)
+[![npm package](https://badge.fury.io/js/%40lifeway%2Foidc-client.svg)](https://www.npmjs.com/package/@lifeway/oidc-client)
 
 # oidc-client
 
